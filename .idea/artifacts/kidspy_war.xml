@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="kidspy:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="kidspy.war">
+      <element id="artifact" artifact-name="kidspy:war exploded" />
+    </root>
+  </artifact>
+</component>
