@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ServerAPI">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/ServerAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/ServerAPI.jar!/" />
+    </SOURCES>
+  </library>
+</component>
