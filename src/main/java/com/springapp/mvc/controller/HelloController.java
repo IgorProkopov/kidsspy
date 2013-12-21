@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -16,16 +17,20 @@ public class HelloController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-        Double[] d = coordinatesService.getCoordinates(null,null);
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for(int x = 0;x<d.length-1;x++){
-            sb.append(String.valueOf(d[x]));
-            sb.append(",");
-        }
-        sb.append(String.valueOf(d[d.length-1]));
-		model.addAttribute("message", sb.toString());
+        Double[] d = coordinatesService.getCoordinates("Сын", "17.12.2013");
+
+		model.addAttribute("message", d);
 		return "hello";
 	}
+
+    @RequestMapping(value = "/getnames", method = RequestMethod.POST)
+    public String printWelcome(@RequestParam(value = "name", required = true) String name,
+                               @RequestParam(value = "date", required = true) String date,
+                               ModelMap model) {
+        System.out.println(name + " " + date);
+        Double[] d = coordinatesService.getCoordinates(name, date);
+        model.addAttribute("message", d);
+        return "hello";
+    }
 
 }

@@ -27,8 +27,6 @@ public class Sender {
         return sb.toString();
     }
 
-
-
     /**
      * ����� ��� �������� ����������� ������.
      * @param name ��� ������������
