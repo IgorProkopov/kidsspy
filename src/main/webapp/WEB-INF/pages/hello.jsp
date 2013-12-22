@@ -5,13 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Kid Spy</title>
     <base href="${pageContext.request.contextPath}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
-    <title>Kid Spy</title>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script type="text/javascript" src="../../resources/js/jquery-2.0.3.js"></script>
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?libraries=geometry&v=3&key=AIzaSyBfcW0KZvzDQcydwhJ7iLtsTE0haAEBbT8&sensor=false">
+    </script>
+
+
     <script>
         var l=0;
         var coordinates;
@@ -20,7 +24,6 @@
            coordinates = new Array(l);
         }
 
-        //var coordinates = new Array(220);
         function setCoordinates(index, value) {
             if(index == 0)
                 setLength();
@@ -28,9 +31,6 @@
         }
 
         function initialize() {
-            //var coordinates = ${message};
-                    //[<c:forEach items="${message}" var="coord"> coord    </c:forEach>];
-
             var mapOptions = {
                 maxZoom:50,
                 minZoom: 3,
@@ -41,20 +41,22 @@
             };
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
+            if(coordinates != null)  {
             var path = new Array(coordinates.length/2);
             console.log(path.length);
                 for(var x = 0; x<path.length;x++){
                     path[x]=new google.maps.LatLng(coordinates[x*2], coordinates[(x*2)+1]);
+                }
             }
 
-            var flightPath = new google.maps.Polyline({
+            var path = new google.maps.Polyline({
                 path: path,
                 geodesic: true,
                 strokeColor: '#FF0000',
                 strokeOpacity: 1.0,
                 strokeWeight: 2
             });
-            flightPath.setMap(map);
+            path.setMap(map);
 
             if(typeof path != 'undefined'){
                 console.log("Creating marker!")
@@ -99,23 +101,24 @@
 
 <div id="map-canvas"></div>
 
-<script>
-    function addUser() {
-        $.ajax({
-            type: "POST",
-            url: "/addUser",
-            data: {
-                "name": $("#name").val(),
-                "pass": $("#name").pass()
-            }
-        }).done(function(response) {
-            console.log(response);
-        });
-    }
-</script>
+
+
+    <script>
+        function addUser() {
+            $.ajax({
+                type: "POST",
+                url: "/adduser",
+                data: {
+                    "name": $("#name").val(),
+                    "pass": $("#pass").val()
+                }
+            }).done(function(response) {
+                        console.log(response);
+                    });
+        }
+    </script>
+
 </body>
 </html>
 
-<script type="text/javascript"
-        src="http://maps.googleapis.com/maps/api/js?libraries=geometry&v=3&key=AIzaSyBfcW0KZvzDQcydwhJ7iLtsTE0haAEBbT8&sensor=false">
-</script>
+
