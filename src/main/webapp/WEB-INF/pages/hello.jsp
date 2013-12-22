@@ -31,6 +31,7 @@
         }
 
         function initialize() {
+            var path;
             var mapOptions = {
                 maxZoom:50,
                 minZoom: 3,
@@ -42,27 +43,28 @@
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
             if(coordinates != null)  {
-            var path = new Array(coordinates.length/2);
+            path = new Array(coordinates.length/2);
             console.log(path.length);
                 for(var x = 0; x<path.length;x++){
                     path[x]=new google.maps.LatLng(coordinates[x*2], coordinates[(x*2)+1]);
                 }
             }
 
-            var path = new google.maps.Polyline({
+            var polyline = new google.maps.Polyline({
                 path: path,
                 geodesic: true,
                 strokeColor: '#FF0000',
                 strokeOpacity: 1.0,
                 strokeWeight: 2
             });
-            path.setMap(map);
+            polyline.setMap(map);
 
             if(typeof path != 'undefined'){
                 console.log("Creating marker!")
-                var marker = new google.maps.Marker({
-                    position: path[path.length],
+                 var marker = new google.maps.Marker({
+                    position: path[path.length-1],
                     map: map,
+                    visible: true,
                     title: 'Hello World!'
                 });
             }
@@ -99,7 +101,7 @@
         <input type="button" id="confirm" onclick="addUser();">
     </form:form>
 
-<div id="map-canvas"></div>
+<div id="map-canvas" style = "height: 500px; width: 500px"></div>
 
 
 
