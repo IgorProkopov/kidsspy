@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    Sender sender = new Sender("178.150.190.201");
+    Sender sender = new Sender("127.0.0.1"/*"178.150.190.201"*/);
 
     @Override
     public void addNewUser(String name, String pass) {

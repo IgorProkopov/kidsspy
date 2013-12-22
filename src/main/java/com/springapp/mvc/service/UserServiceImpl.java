@@ -2,7 +2,9 @@ package com.springapp.mvc.service;
 
 import com.springapp.mvc.reposetory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public class CoordinatesRepositoryImpl implements CoordinatesRepository {
 
 
-     Sender sender = new Sender("178.150.190.201");
+     Sender sender = new Sender("127.0.0.1"/*"178.150.190.201"*/);
 
 
 

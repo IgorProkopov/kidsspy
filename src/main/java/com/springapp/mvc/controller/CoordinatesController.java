@@ -9,19 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/")
-public class HelloController {
+public class CoordinatesController {
 
     @Autowired
     private CoordinatesService coordinatesService;
-
-	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
-        Double[] d = coordinatesService.getCoordinates("Сын", "17.12.2013");
-
-		model.addAttribute("message", d);
-		return "hello";
-	}
 
     @RequestMapping(value = "/getnames", method = RequestMethod.POST)
     public String printWelcome(@RequestParam(value = "name", required = true) String name,
