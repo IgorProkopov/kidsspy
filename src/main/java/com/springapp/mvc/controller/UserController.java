@@ -38,7 +38,7 @@ public class UserController {
                           @RequestParam(value = "pass", required = true) String pass,
                           ModelMap model) {
         userService.addNewUser(name, pass);
-        System.out.println("Adding new user");
+        System.out.println("Adding new user!!!");
         return "hello";
     }
 
