@@ -24,4 +24,14 @@ public class UserServiceImpl implements UserService {
     public int connectChild(String childName, String parentName) {
         return userRepository.connectChild(childName, parentName);
     }
+
+    @Override
+    public int disconnectChild(String childName, String parentName) {
+        return userRepository.disconnectChild(childName, parentName);
+    }
+
+    @Override
+    public String[] getConnectedChildren(String parentName) {
+        return userRepository.getConnectedChildren(parentName);
+    }
 }

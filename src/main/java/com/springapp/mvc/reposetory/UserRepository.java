@@ -8,4 +8,8 @@ public interface UserRepository {
 
     public int connectChild(String childName, String parentName);
 
+    public int disconnectChild(String childName, String parentName);
+
+    public String[] getConnectedChildren(String parentName);
+
 }

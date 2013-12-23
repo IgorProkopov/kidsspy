@@ -27,6 +27,14 @@ public class Sender {
         return sb.toString();
     }
 
+    private String[] convertString(String str){
+        str = str.replace("[", "");
+        str = str.replace("]", "");
+        str = str.replace("\"", "");
+        str = str.replace(",", " ");
+        return str.split(" ");
+    }
+
     /**
      * ����� ��� �������� ����������� ������.
      * @param name ��� ������������
@@ -47,8 +55,20 @@ public class Sender {
         return sendRequest(makeRequest(name, pass), 7777);
     }
 
-    public int addChild(String childName, String parentName){
+    public int connectChild(String childName, String parentName){
         return Integer.parseInt(sendRequest(makeRequest(childName, parentName), 3333));
+    }
+
+    public int disconnectChild(String childName, String parentName){
+        return Integer.parseInt(sendRequest(makeRequest(childName, parentName),2222));
+    }
+
+    public String[] getArrayOfConnectedChildren(String parentName){
+        String answer = sendRequest(parentName,1111);
+        if(answer.equals("null")){
+            return null;
+        }
+         return convertString(answer);
     }
 
     /**
@@ -58,12 +78,7 @@ public class Sender {
      * @return
      */
     public String[] getCoordinates(String name, String date) {
-        String corsFromServer = sendRequest(makeRequest(name, date), 6666);
-        corsFromServer = corsFromServer.replace("[", "");
-        corsFromServer = corsFromServer.replace("]", "");
-        corsFromServer = corsFromServer.replace("\"", "");
-        corsFromServer = corsFromServer.replace(",", " ");
-        return corsFromServer.split(" ");
+        return convertString(sendRequest(makeRequest(name, date), 6666));
     }
 
     private String sendRequest(String data, int port) {

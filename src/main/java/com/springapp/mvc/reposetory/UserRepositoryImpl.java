@@ -19,6 +19,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public int connectChild(String childName, String parentName) {
-        return sender.addChild(childName,parentName);
+        return sender.connectChild(childName, parentName);
+    }
+
+    @Override
+    public int disconnectChild(String childName, String parentName) {
+        return sender.connectChild(childName, parentName);
+    }
+
+    @Override
+    public String[] getConnectedChildren(String parentName) {
+        return sender.getArrayOfConnectedChildren(parentName);
     }
 }
