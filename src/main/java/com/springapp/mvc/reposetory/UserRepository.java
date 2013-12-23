@@ -6,4 +6,6 @@ public interface UserRepository {
 
     public int checkUser(String name, String pass);
 
+    public int connectChild(String childName, String parentName);
+
 }

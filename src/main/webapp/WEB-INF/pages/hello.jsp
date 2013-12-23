@@ -9,8 +9,7 @@
     <base href="${pageContext.request.contextPath}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="../../resources/js/jquery-2.0.3.js"></script>
+    <jsp:include page="fragments/links.jsp"/>
     <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?libraries=geometry&v=3&key=AIzaSyBfcW0KZvzDQcydwhJ7iLtsTE0haAEBbT8&sensor=false">
     </script>
@@ -89,18 +88,26 @@
     </script>
 </c:forEach>
 
-    <form:form id="info" action="${pageContext.request.contextPath}/getnames" method="POST">
-        <input type="text" id="name" name="name" placeholder="Name">
-        <input type="text" id="date" name="date" placeholder="Date {dd.mm.yyyy}">
-        <input type="submit" id="confirm">
-    </form:form>
+    <div class="form-group table-bordered col-md-3" style="text-align: center">
+        <form:form id="info" action="${pageContext.request.contextPath}/getnames" method="POST">
+            <input class="form-control" type="text" id="name" name="name" placeholder="Name">
+            <input class="form-control" type="text" id="date" name="date" placeholder="Date {dd.mm.yyyy}">
+            <button class="btn btn-primary btn-lg" type="submit" id="confirm">Go!</button>
+        </form:form>
 
-    <form:form id="addForm">
-        <input type="text" id="name" name="name" placeholder="Name">
-        <input type="text" id="pass" name="pass" placeholder="Password">
-        <input type="button" id="confirm" onclick="addUser();">
-    </form:form>
+        <form:form id="addForm">
+            <input class="form-control" type="text" id="addingChildName" name="name" placeholder="Name">
+            <input class="form-control" type="password" id="addingChildpass" name="pass" placeholder="Password">
+            <button class="btn btn-primary btn-lg" type="button" id="confirm" onclick="addUser();">Create User</button>
+        </form:form>
 
+        <form:form id="trackingForm">
+            <input class="form-control" type="text" id="trackingChildName" name="name" placeholder="Child's name">
+            <input class="form-control" type="text" id="parentName" name="pass" placeholder="Parent's name">
+            <input class="form-control" type="password" id="childPass" name="pass" placeholder="Child's password">
+            <button class="btn btn-primary btn-lg" type="button" id="confirm" onclick="addTrackingChild();">Connect Child</button>
+        </form:form>
+    </div>
 <div id="map-canvas" style = "height: 500px; width: 500px"></div>
 
 
@@ -111,8 +118,24 @@
                 type: "POST",
                 url: "/adduser",
                 data: {
-                    "name": $("#name").val(),
-                    "pass": $("#pass").val()
+                    "name": $("#addingChildName").val(),
+                    "pass": $("#addingChildpass").val()
+                }
+            }).done(function(response) {
+                        console.log(response);
+                    });
+        }
+    </script>
+
+    <script>
+        function addTrackingChild() {
+            $.ajax({
+                type: "POST",
+                url: "/addtrackingchild",
+                data: {
+                    "child": $("#trackingChildName").val(),
+                    "pass": $("#childPass").val(),
+                    "parent": $("#parentName").val()
                 }
             }).done(function(response) {
                         console.log(response);

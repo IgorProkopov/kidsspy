@@ -19,4 +19,9 @@ public class UserServiceImpl implements UserService {
     public int checkUser(String name, String pass) {
         return userRepository.checkUser(name, pass);
     }
+
+    @Override
+    public int connectChild(String childName, String parentName) {
+        return userRepository.connectChild(childName, parentName);
+    }
 }

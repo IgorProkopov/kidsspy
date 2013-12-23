@@ -39,6 +39,42 @@ public class UserController {
                           ModelMap model) {
         userService.addNewUser(name, pass);
         System.out.println("Adding new user!!!");
+        System.out.println(name);
+        System.out.println(pass);
+        return "hello";
+    }
+
+    @RequestMapping(value = "/addtrackingchild", method = RequestMethod.POST)
+    public String addChild(@RequestParam(value = "child", required = true) String child,
+                           @RequestParam(value = "pass", required = true) String pass,
+                          @RequestParam(value = "parent", required = true) String parent,
+                          ModelMap model) {
+        System.out.println("Connecting child!");
+        int res = userService.checkUser(child,pass);
+        if(res==0){
+            //Show alert dialog that password is incorrect
+            System.out.println("Password is incorrect!");
+            return "hello";
+        }
+        if(res==-1){
+            //Show alert dialog that user is not exist
+            System.out.println("User is not exisit!");
+            return "hello";
+        }
+        if(res== 1){
+        res = userService.connectChild(child, parent);
+            if(res == 0){
+                //Show alert dialog that user has already connected
+                System.out.println("User has been already connected!");
+                return "hello";
+            }
+            if(res == 1){
+                //Show alert dialog user has been sucssefully connected
+                System.out.println("User has beenconnected!");
+                return "hello";
+            }
+        return "hello";
+        }
         return "hello";
     }
 

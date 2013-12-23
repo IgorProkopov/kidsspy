@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authorization</title>
     <link href="../../resources/css/login.css" rel="stylesheet">
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <jsp:include page="fragments/links.jsp"/>
 </head>
 <body>
 

@@ -16,4 +16,9 @@ public class UserRepositoryImpl implements UserRepository {
     public int checkUser(String name, String pass) {
         return sender.checkUser(name, pass);
     }
+
+    @Override
+    public int connectChild(String childName, String parentName) {
+        return sender.addChild(childName,parentName);
+    }
 }

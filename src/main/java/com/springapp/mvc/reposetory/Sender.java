@@ -47,6 +47,10 @@ public class Sender {
         return sendRequest(makeRequest(name, pass), 7777);
     }
 
+    public int addChild(String childName, String parentName){
+        return Integer.parseInt(sendRequest(makeRequest(childName, parentName), 3333));
+    }
+
     /**
      * ��������� ���������.
      * @param name ���
