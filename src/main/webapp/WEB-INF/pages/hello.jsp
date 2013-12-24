@@ -16,10 +16,10 @@
 
 
     <script>
-        var l=0;
-        var coordinates;
+       /*var l=0;
+        var coordinates;    */
 
-        function setLength(){
+        /*function setLength(){
            coordinates = new Array(l);
         }
 
@@ -27,9 +27,10 @@
             if(index == 0)
                 setLength();
             coordinates[index] = value;
-        }
+        }  */
 
         function initialize() {
+            var coordinates = ${message};
             var path;
             var mapOptions = {
                 maxZoom:50,
@@ -39,15 +40,20 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 streetViewControl: false
             };
+
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
             if(coordinates != null)  {
-            path = new Array(coordinates.length/2);
+            for(var k in coordinates){
+
+
+
+            path = new Array(h[k].length/2);
             console.log(path.length);
                 for(var x = 0; x<path.length;x++){
-                    path[x]=new google.maps.LatLng(coordinates[x*2], coordinates[(x*2)+1]);
+                    path[x]=new google.maps.LatLng(h[k[x*2]], h[k[(x*2)+1]]);
                 }
-            }
+
 
             var polyline = new google.maps.Polyline({
                 path: path,
@@ -66,7 +72,7 @@
                     visible: true,
                     title: 'Hello World!'
                 });
-            }
+            } }    }
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
@@ -75,18 +81,18 @@
 </head>
 <body>
 
-    <c:forEach var="item" items="${message}" varStatus="loop">
+   <!-- <c:forEach var="item" items="${message}" varStatus="loop">
     <script>
         l++;
     </script>
 
-    </c:forEach>
+    </c:forEach>  -->
 
-<c:forEach var="item" items="${message}" varStatus="loop">
+<!--<c:forEach var="item" items="${message}" varStatus="loop">
     <script>
         setCoordinates(${loop.index}, ${item});
     </script>
-</c:forEach>
+</c:forEach>   -->
 
     <div class="form-group table-bordered col-md-3" style="text-align: center">
         <form:form id="info" action="${pageContext.request.contextPath}/getnames" method="POST">

@@ -1,5 +1,6 @@
 package com.springapp.mvc.controller;
 
+import com.springapp.mvc.service.CoordinatesService;
 import com.springapp.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,15 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Hashtable;
+
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CoordinatesService coordinatesService;
+
     @RequestMapping("/")
     public String printWelcome(ModelMap model) {
-        System.out.println("BLABLABLABLABLABLABLABLABLABLABLABLA");
+
        return "login";
     }
 
@@ -25,6 +33,15 @@ public class UserController {
                              @RequestParam(value = "pass", required = true) String pass,
                              ModelMap model) {
         int x =  userService.checkUser(name, pass);
+        String[] children = userService.getConnectedChildren(name);
+        Hashtable<String, Double[]> coordinates = new Hashtable<String, Double[]>();
+        for(String chName : children){
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = new Date();
+            System.out.println("BLABLABLABLABLABLABLABLABLABLABLABLA");
+            coordinates.put(chName, coordinatesService.getCoordinates(chName, format.format(date).toString()));
+        }
+        model.addAttribute("message", coordinates);
         if(x==1)
             return "hello";
         else if(x==0)
