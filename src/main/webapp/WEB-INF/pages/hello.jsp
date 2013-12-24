@@ -16,10 +16,10 @@
 
 
     <script>
-       /*var l=0;
-        var coordinates;    */
+       var l=0;
+        var coordinates;
 
-        /*function setLength(){
+        function setLength(){
            coordinates = new Array(l);
         }
 
@@ -27,10 +27,10 @@
             if(index == 0)
                 setLength();
             coordinates[index] = value;
-        }  */
+        }
 
         function initialize() {
-            var coordinates = ${message};
+
             var path;
             var mapOptions = {
                 maxZoom:50,
